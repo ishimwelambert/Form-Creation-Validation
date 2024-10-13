@@ -50,11 +50,12 @@ function validateRegistrationForm() {
         feedback.innerHTML = '';  // Clear previous feedback
         feedback.style.display = 'none';  // Hide feedback initially
         
-        const username = document.getElementById('username').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+        // Trim values to remove leading/trailing spaces
+        const username = document.getElementById('username').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value.trim();
 
-        // Username Validation: Must be at least 3 characters
+        // Username Validation: Must be at least 3 characters after trimming
         if (username.length < 3) {
             feedback.innerHTML += '<p>Username must be at least 3 characters long.</p>';
             isValid = false;
@@ -67,7 +68,7 @@ function validateRegistrationForm() {
             isValid = false;
         }
 
-        // Password Validation: Must be at least 8 characters
+        // Password Validation: Must be at least 8 characters after trimming
         if (password.length < 8) {
             feedback.innerHTML += '<p>Password must be at least 8 characters long.</p>';
             isValid = false;
