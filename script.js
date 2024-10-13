@@ -38,5 +38,58 @@ async function fetchUserData() {
     }
 }
 
-// Ensure that the fetchUserData function runs only after the DOM has fully loaded
-document.addEventListener('DOMContentLoaded', fetchUserData);
+// Function to validate the registration form
+function validateRegistrationForm() {
+    const form = document.getElementById('registration-form');
+    const feedback = document.getElementById('form-feedback');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent the form from submitting
+        
+        let isValid = true;
+        feedback.innerHTML = '';  // Clear previous feedback
+        feedback.style.display = 'none';  // Hide feedback initially
+        
+        const username = document.getElementById('username').value;
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+
+        // Username Validation: Must be at least 3 characters
+        if (username.length < 3) {
+            feedback.innerHTML += '<p>Username must be at least 3 characters long.</p>';
+            isValid = false;
+        }
+
+        // Email Validation: Basic pattern for email format
+        const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        if (!emailPattern.test(email)) {
+            feedback.innerHTML += '<p>Please enter a valid email address.</p>';
+            isValid = false;
+        }
+
+        // Password Validation: Must be at least 8 characters
+        if (password.length < 8) {
+            feedback.innerHTML += '<p>Password must be at least 8 characters long.</p>';
+            isValid = false;
+        }
+
+        // Show feedback if form is invalid
+        if (!isValid) {
+            feedback.style.color = '#d8000c';  // Red for error
+            feedback.style.backgroundColor = '#ffbaba';  // Light red background
+            feedback.style.display = 'block';
+        } else {
+            // Show success message if form is valid
+            feedback.style.color = '#4F8A10';  // Green for success
+            feedback.style.backgroundColor = '#DFF2BF';  // Light green background
+            feedback.innerHTML = '<p>Registration successful!</p>';
+            feedback.style.display = 'block';
+        }
+    });
+}
+
+// Run the necessary scripts when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() {
+    fetchUserData();  // Fetch user data and display it
+    validateRegistrationForm();  // Validate the registration form
+});
