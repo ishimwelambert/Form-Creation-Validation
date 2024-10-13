@@ -2,6 +2,7 @@
 async function fetchUserData() {
     const apiUrl = 'https://jsonplaceholder.typicode.com/users'; // API URL
     const dataContainer = document.getElementById('api-data'); // Selecting the data container
+    const messages = []; // Array to hold error or success messages
 
     try {
         // Fetch the data from the API
@@ -27,21 +28,31 @@ async function fetchUserData() {
             // Add the <li> to the <ul>
             userList.appendChild(listItem);
         });
-        
+
         // Add the <ul> to the dataContainer
         dataContainer.appendChild(userList);
+
+        // Push a success message to the messages array
+        messages.push('User data successfully fetched and displayed.');
         
     } catch (error) {
         // Handle errors
         dataContainer.innerHTML = 'Failed to load user data.';
         console.error('Error fetching user data:', error);
+        
+        // Push an error message to the messages array
+        messages.push('Error fetching user data.');
     }
+
+    // Log all messages
+    console.log(messages);
 }
 
 // Function to validate the registration form
 function validateRegistrationForm() {
     const form = document.getElementById('registration-form');
     const feedback = document.getElementById('form-feedback');
+    const messages = []; // Array to store form validation messages
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent the form from submitting
@@ -57,20 +68,20 @@ function validateRegistrationForm() {
 
         // Username Validation: Must be at least 3 characters after trimming
         if (username.length < 3) {
-            feedback.innerHTML += '<p>Username must be at least 3 characters long.</p>';
+            messages.push('Username must be at least 3 characters long.');
             isValid = false;
         }
 
         // Email Validation: Basic pattern for email format
         const emailPattern = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         if (!emailPattern.test(email)) {
-            feedback.innerHTML += '<p>Please enter a valid email address.</p>';
+            messages.push('Please enter a valid email address.');
             isValid = false;
         }
 
         // Password Validation: Must be at least 8 characters after trimming
         if (password.length < 8) {
-            feedback.innerHTML += '<p>Password must be at least 8 characters long.</p>';
+            messages.push('Password must be at least 8 characters long.');
             isValid = false;
         }
 
@@ -79,13 +90,18 @@ function validateRegistrationForm() {
             feedback.style.color = '#d8000c';  // Red for error
             feedback.style.backgroundColor = '#ffbaba';  // Light red background
             feedback.style.display = 'block';
+            feedback.innerHTML = messages.join('<br>'); // Display the error messages
         } else {
-            // Show success notice if form is valid
+            // Push a success message if the form is valid
+            messages.push('Registration successful!');
             feedback.style.color = '#4F8A10';  // Green for success
             feedback.style.backgroundColor = '#DFF2BF';  // Light green background
             feedback.innerHTML = '<p>Registration successful!</p>';
             feedback.style.display = 'block';
         }
+        
+        // Log all messages
+        console.log(messages);
     });
 }
 
