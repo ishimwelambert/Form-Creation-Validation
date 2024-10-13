@@ -51,15 +51,15 @@ async function fetchUserData() {
 // Function to validate the registration form
 function validateRegistrationForm() {
     const form = document.getElementById('registration-form');
-    const feedback = document.getElementById('form-feedback');
+    const feedbackContainer = document.getElementById('form-feedback'); // Renamed variable
     const messages = []; // Array to store form validation messages
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); // Prevent the form from submitting
         
         let isValid = true;
-        feedback.innerHTML = '';  // Clear previous feedback
-        feedback.style.display = 'none';  // Hide feedback initially
+        feedbackContainer.innerHTML = '';  // Clear previous feedback
+        feedbackContainer.style.display = 'none';  // Hide feedback initially
         
         // Trim values to remove leading/trailing spaces
         const username = document.getElementById('username').value.trim();
@@ -87,17 +87,17 @@ function validateRegistrationForm() {
 
         // Show feedback if form is invalid
         if (!isValid) {
-            feedback.style.color = '#d8000c';  // Red for error
-            feedback.style.backgroundColor = '#ffbaba';  // Light red background
-            feedback.style.display = 'block';
-            feedback.innerHTML = messages.join('<br>'); // Display the error messages
+            feedbackContainer.style.color = '#d8000c';  // Set color for error messages
+            feedbackContainer.style.backgroundColor = '#ffbaba';  // Light red background
+            feedbackContainer.style.display = 'block';
+            feedbackContainer.innerHTML = messages.join('<br>'); // Display the error messages
         } else {
             // Push a success message if the form is valid
             messages.push('Registration successful!');
-            feedback.style.color = '#4F8A10';  // Green for success
-            feedback.style.backgroundColor = '#DFF2BF';  // Light green background
-            feedback.innerHTML = '<p>Registration successful!</p>';
-            feedback.style.display = 'block';
+            feedbackContainer.style.color = '#4F8A10';  // Green for success
+            feedbackContainer.style.backgroundColor = '#DFF2BF';  // Light green background
+            feedbackContainer.innerHTML = '<p>Registration successful!</p>';
+            feedbackContainer.style.display = 'block';
         }
         
         // Log all messages
