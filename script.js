@@ -10,7 +10,7 @@ async function fetchUserData() {
         // Convert the response to JSON
         const users = await response.json();
         
-        // Clear the "Loading..." message
+        // Clear the "Loading..." text
         dataContainer.innerHTML = '';
         
         // Create a <ul> element to store the list of users
@@ -24,11 +24,11 @@ async function fetchUserData() {
             // Set the <li> content to the user's name
             listItem.textContent = user.name;
             
-            // Append the <li> to the <ul>
+            // Add the <li> to the <ul>
             userList.appendChild(listItem);
         });
         
-        // Append the <ul> to the dataContainer
+        // Add the <ul> to the dataContainer
         dataContainer.appendChild(userList);
         
     } catch (error) {
@@ -80,7 +80,7 @@ function validateRegistrationForm() {
             feedback.style.backgroundColor = '#ffbaba';  // Light red background
             feedback.style.display = 'block';
         } else {
-            // Show success message if form is valid
+            // Show success notice if form is valid
             feedback.style.color = '#4F8A10';  // Green for success
             feedback.style.backgroundColor = '#DFF2BF';  // Light green background
             feedback.innerHTML = '<p>Registration successful!</p>';
